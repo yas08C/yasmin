@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block conteudo %}
+<h2>Atuadores</h2>
+
+<form method="post" action="/atuadores/novo">
+    <input type="text" name="nome" placeholder="Nome (ex: Lampada da cozinha)" required>
+    <input type="text" name="tipo" placeholder="Tipo (ex: lampada)" required>
+    <select name="id_comodo">
+        {% for c in comodos %}
+        <option value="{{ c.id }}">{{ c.nome }}</option>
+        {% endfor %}
+    </select>
+    <button type="submit">Adicionar</button>
+</form>
+
+<table>
+    <tr><th>Nome</th><th>Tipo</th><th>Cômodo</th><th>Estado</th><th>Ações</th></tr>
+    {% for a in atuadores %}
+    <tr>
+        <td>{{ a.nome }}</td>
+        <td>{{ a.tipo }}</td>
+        <td>{{ a.comodo }}</td>
+        <td>
+            {% if a.estado == 'ligado' %}
+                <span class="ligado">ligado</span>
+            {% else %}
+                <span class="desligado">desligado</span>
+            {% endif %}
+        </td>
+        <td>
+            <form method="post" action="/atuadores/{{ a.id }}/alternar" class="inline">
+                <button type="submit">Ligar/Desligar</button>
+            </form>
+            <form method="post" action="/atuadores/{{ a.id }}/apagar" class="inline">
+                <button type="submit" class="perigo">Apagar</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

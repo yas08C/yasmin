@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block conteudo %}
+<h2>Leituras dos sensores</h2>
+<p>Total de leituras: <b>{{ total }}</b></p>
+
+<form method="post" action="/leituras/nova">
+    <select name="id_sensor">
+        {% for s in sensores %}
+        <option value="{{ s.id }}">{{ s.nome }}</option>
+        {% endfor %}
+    </select>
+    <input type="number" step="0.1" name="valor" placeholder="Valor" required>
+    <input type="datetime-local" name="data_hora" value="{{ agora }}" required>
+    <button type="submit">Registrar leitura</button>
+</form>
+
+<p>
+    {% if so_altas %}
+        <a href="/leituras">Mostrar todas</a>
+    {% else %}
+        <a href="/leituras?altas=1">Mostrar só valores acima de 28</a>
+    {% endif %}
+</p>
+
+<table>
+    <tr><th>Sensor</th><th>Valor</th><th>Data e hora</th><th>Ações</th></tr>
+    {% for l in leituras %}
+    <tr>
+        <td>{{ l.sensor }}</td>
+        <td>{{ l.valor }}</td>
+        <td>{{ l.data_hora }}</td>
+        <td>
+            <form method="post" action="/leituras/{{ l.id }}/apagar" class="inline">
+                <button type="submit" class="perigo">Apagar</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

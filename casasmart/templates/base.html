@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>CasaSmart</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <header>
+        <h1>🏠 CasaSmart</h1>
+        <nav>
+            <a href="/">Início</a>
+            <a href="/comodos">Cômodos</a>
+            <a href="/atuadores">Atuadores</a>
+            <a href="/leituras">Leituras</a>
+        </nav>
+    </header>
+
+    <main>
+        {% with mensagens = get_flashed_messages() %}
+            {% for m in mensagens %}
+                <p class="aviso">{{ m }}</p>
+            {% endfor %}
+        {% endwith %}
+
+        {% block conteudo %}{% endblock %}
+    </main>
+</body>
+</html>

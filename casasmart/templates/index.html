@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block conteudo %}
+<h2>Minha casa</h2>
+
+{% for c in comodos %}
+<div class="caixa">
+    <h3>{{ c.nome }}</h3>
+
+    <h4>Sensores</h4>
+    {% if c.sensores %}
+    <ul>
+        {% for s in c.sensores %}
+        <li>
+            {{ s.nome }} ({{ s.tipo }}):
+            {% if s.ultima %}
+                <b>{{ s.ultima.valor }}</b> em {{ s.ultima.data_hora }}
+            {% else %}
+                sem leituras
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+        <p>Nenhum sensor.</p>
+    {% endif %}
+
+    <h4>Atuadores</h4>
+    {% if c.atuadores %}
+    <ul>
+        {% for a in c.atuadores %}
+        <li>
+            {{ a.nome }} -
+            {% if a.estado == 'ligado' %}
+                <span class="ligado">ligado</span>
+            {% else %}
+                <span class="desligado">desligado</span>
+            {% endif %}
+            <form method="post" action="/atuadores/{{ a.id }}/alternar" class="inline">
+                <button type="submit">Ligar/Desligar</button>
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+        <p>Nenhum atuador.</p>
+    {% endif %}
+</div>
+{% endfor %}
+{% endblock %}

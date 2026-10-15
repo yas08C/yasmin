@@ -1,0 +1,46 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+}
+header {
+    background-color: #2c5f8a;
+    color: white;
+    padding: 10px 20px;
+}
+header h1 { margin: 0 0 8px 0; }
+nav a {
+    color: white;
+    margin-right: 15px;
+    text-decoration: none;
+}
+nav a:hover { text-decoration: underline; }
+main { padding: 20px; }
+.caixa {
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 10px 20px;
+    margin-bottom: 15px;
+}
+table {
+    border-collapse: collapse;
+    background-color: white;
+    margin-top: 15px;
+}
+th, td {
+    border: 1px solid #ccc;
+    padding: 6px 12px;
+    text-align: left;
+}
+th { background-color: #ddd; }
+form.inline { display: inline; }
+input, select { padding: 5px; margin: 2px; }
+button { padding: 5px 10px; cursor: pointer; }
+button.perigo { background-color: #c0392b; color: white; border: none; }
+.ligado { color: green; font-weight: bold; }
+.desligado { color: gray; }
+.aviso {
+    background-color: #ffffcc;
+    border: 1px solid #cccc66;
+    padding: 8px;
+}
